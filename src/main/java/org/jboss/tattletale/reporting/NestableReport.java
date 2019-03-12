@@ -22,15 +22,15 @@
 
 package org.jboss.tattletale.reporting;
 
-import org.jboss.tattletale.core.Archive;
-import org.jboss.tattletale.core.ArchiveTypes;
-import org.jboss.tattletale.core.Location;
-import org.jboss.tattletale.core.NestableArchive;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
+
+import org.jboss.tattletale.core.Archive;
+import org.jboss.tattletale.core.ArchiveTypes;
+import org.jboss.tattletale.core.Location;
+import org.jboss.tattletale.core.NestableArchive;
 
 import javassist.bytecode.ClassFile;
 
@@ -290,7 +290,7 @@ public abstract class NestableReport extends ArchiveReport
             report = new WarReport(nestedSubArchive, 2);
          }
 
-         if (!archiveName.contains("WEB-INF/classes"))
+         if (!archiveName.contains("WEB-INF/classes") && !archiveName.contains("BOOT-INF/classes"))
          {
             report.generate(outputPath);
             bw.write("        <tr>" + Dump.newLine());
@@ -313,7 +313,8 @@ public abstract class NestableReport extends ArchiveReport
     * @param bw the writer to use
     * @throws IOException if an error occurs
     */
-   public void writeHtmlBodyHeader(BufferedWriter bw) throws IOException
+   @Override
+public void writeHtmlBodyHeader(BufferedWriter bw) throws IOException
    {
       bw.write("<body>" + Dump.newLine());
       bw.write(Dump.newLine());

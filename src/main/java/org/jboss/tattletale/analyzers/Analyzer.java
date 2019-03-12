@@ -40,7 +40,11 @@ public class Analyzer
    public ArchiveScanner getScanner(File file)
    {
       String fileName = file.getName();
-      if (fileName.contains(".jar"))
+
+      if (fileName.contains(".jar") && SpringBootScanner.isBootJar(file)) {
+    	 return new SpringBootScanner();
+      }
+      else if (fileName.contains(".jar"))
       {
          return new JarScanner();
       }

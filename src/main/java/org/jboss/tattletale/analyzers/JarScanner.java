@@ -21,11 +21,6 @@
 */
 package org.jboss.tattletale.analyzers;
 
-import org.jboss.tattletale.core.Archive;
-import org.jboss.tattletale.core.JarArchive;
-import org.jboss.tattletale.core.Location;
-import org.jboss.tattletale.profiles.Profile;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +40,11 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
+import org.jboss.tattletale.core.Archive;
+import org.jboss.tattletale.core.JarArchive;
+import org.jboss.tattletale.core.Location;
+import org.jboss.tattletale.profiles.Profile;
+
 /**
  * Java archive scanner
  *
@@ -59,7 +59,8 @@ public class JarScanner extends AbstractScanner
     * @param file        The file
     * @return The archive
     */
-   public Archive scan(File file)
+   @Override
+public Archive scan(File file)
    {
       return scan(file, null, null, null);
    }
@@ -73,7 +74,8 @@ public class JarScanner extends AbstractScanner
     * @param blacklisted The set of black listed packages
     * @return The archive
     */
-   public Archive scan(File file, Map<String, SortedSet<String>> gProvides, List<Profile> known,
+   @Override
+public Archive scan(File file, Map<String, SortedSet<String>> gProvides, List<Profile> known,
                        Set<String> blacklisted)
    {
       Archive archive = null;
