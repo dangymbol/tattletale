@@ -362,6 +362,23 @@
         </copy>
     </target>
 
+    <target name="packageZip" depends="clean,dist">
+        <!-- Package just the zip file with no docs -->
+        <delete dir="${build.dir}"/>
+        <mkdir dir="${build.dir}/${name}-${major}.${minor}.${patch}.${type}"/>
+
+        <move todir="${build.dir}/${name}-${major}.${minor}.${patch}.${type}"
+              includeEmptyDirs="false">
+            <fileset dir="${dist.dir}">
+              <include name="**/*"/>
+              <exclude name="**/${tattletale-tools.jar}"/>
+            </fileset>
+        </move>
+
+        <zip destfile="${name}-${major}.${minor}.${patch}.${type}.zip"
+             basedir="${build.dir}"/>
+    </target>
+
     <!-- =================================================================== -->
     <!-- Release                                                             -->
     <!-- =================================================================== -->
